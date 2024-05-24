@@ -33,7 +33,7 @@ export function updateMapMarkers() {
             if (gps) {
                 if (existingMarker) { //skip creating markers if already exist
                     if (!markerClicked) { //handler to reset map if you clicked on marker
-                        map.setView([gps.latitude, gps.longitude], 12); // Set view only if not triggered by marker click
+                        map.setView([gps.latitude, gps.longitude], 10); // Set view only if not triggered by marker click
                         markerClicked = false;
                     }
                     return
