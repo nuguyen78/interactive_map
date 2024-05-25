@@ -16,6 +16,7 @@ export function initMap() {
 
 //create new marker on map when image show in viewport
 export function updateMapMarkers() {
+    console.log('scrolled');
      const galleryElement = document.querySelector('.gallery');
     const visibleImages = Array.from(galleryElement.querySelectorAll('img')).filter(img => {
         const rect = img.getBoundingClientRect();

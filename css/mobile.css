@@ -1,0 +1,21 @@
+@media (max-width: 600px) {
+    .content {
+        display: grid;
+        height: 100vh; /* Výška celého pohledu */
+        grid-template-rows: 70% 30%; /* Rozdělení na 70% a 30% */
+        grid-template-columns: auto;
+    }
+
+    .gallery{
+        overflow-y: auto;
+        border-bottom: 1.5px solid black;
+        border-right: none;
+    }
+
+    .map{
+        bottom: 0;
+        top: auto;
+        height: 30%;
+        width: 100%;
+    }
+}

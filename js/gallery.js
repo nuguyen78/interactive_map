@@ -18,7 +18,11 @@ export function initGallery() {
           galleryElement.appendChild(createSeparator());
         });
       updateMapMarkers; //first load of markers on map
-      document.addEventListener("scroll", updateMapMarkers); //update markers on scrolling in gallery
+      if (window.innerWidth < 600) {
+        galleryElement.addEventListener("scroll", updateMapMarkers); //update markers on scrolling in gallery mobile version
+      } else {
+        document.addEventListener("scroll", updateMapMarkers); //update markers on scrolling in gallery
+      }
     });
 }
 
