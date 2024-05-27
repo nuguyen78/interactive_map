@@ -4,6 +4,7 @@ let markerClicked = false; //handler to reset map if you clicked on marker
 
 //inicilazition of empty map
 export function initMap() {
+    try {
     map = L.map('map').setView([0, 0], 2);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -12,12 +13,19 @@ export function initMap() {
 
 // Initial markers can be empty or set to some initial values if needed
     markers = [];
+}catch (error) {
+    console.error("Error initializing map:", error);
+  }
 }
 
 //create new marker on map when image show in viewport
 export function updateMapMarkers() {
     console.log('scrolled');
      const galleryElement = document.querySelector('.gallery');
+     if (!galleryElement) {
+        console.error("Gallery element not found");
+        return;
+      }
     const visibleImages = Array.from(galleryElement.querySelectorAll('img')).filter(img => {
         const rect = img.getBoundingClientRect();
         return (
@@ -51,8 +59,8 @@ export function updateMapMarkers() {
                 map.setView([gps.latitude, gps.longitude], 10);
             }
         }).catch(error => { // Handle error from exifr.gps()
-            //console.error('Error extracting GPS data for image: ' + img.alt);
-            //console.error(error); // Log the error for further investigation
+            console.error('Error extracting GPS data for image: ' + img.alt);
+            console.error(error); // Log the error for further investigation
             return
         });
     });

@@ -4,8 +4,16 @@ import { updateMapMarkers } from "./map.js";
 export function initGallery() {
   const galleryElement = document.querySelector(".gallery");
   fetch("https://api.github.com/repos/cebreus/herman-homework/contents/content") //github repository provided be herman
-    .then((response) => response.json())
-    .then((data) => {
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then((data) => {
+    if (!Array.isArray(data)) {
+      throw new Error("Unexpected response format");
+    }
       data
         .filter((file) => file.name.endsWith(".jpg"))
         .forEach((image) => {
@@ -23,7 +31,9 @@ export function initGallery() {
       } else {
         document.addEventListener("scroll", updateMapMarkers); //update markers on scrolling in gallery
       }
-    });
+    }) .catch((error) => {
+      console.error("Error loading gallery content:", error);
+    });;
 }
 
 //separator for clearer gallery(i didn't spend time to make it look 'pretty')
